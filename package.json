@@ -1,0 +1,30 @@
+{
+  "name": "cynapse-ta",
+  "version": "1.0.0",
+  "description": "Cynapse: Chinese Red Envelopes",
+  "main": "app.js",
+  "scripts": {
+    "test": "vitest --run --reporter verbose",
+    "test:watch": "vitest",
+    "start": "npm run build && http-server -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rurumeister/cynapse-ta.git"
+  },
+  "keywords": [],
+  "author": "Elroy Chua",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "http-server": "^14.1.0",
+    "install": "^0.13.0",
+    "npm": "^8.6.0",
+    "typescript": "^5.8.3",
+    "vitest": "^0.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/rurumeister/cynapse-ta/issues"
+  },
+  "homepage": "https://github.com/rurumeister/cynapse-ta#readme"
+}
