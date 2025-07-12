@@ -1,0 +1,105 @@
+:root {
+  --primary-background: #ff8661;
+  --primary-text: #fff;
+  --secondary-text: #cc1200;
+  --button-background: #ff6b6b;
+  --line-border: #ff3c3c;
+  --input-background: #fff;
+  --input-border: #ccc;
+  --input-text: #333;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  background-color: var(--primary-background);
+  color: var(--primary-text);
+  justify-content: space-between;
+}
+
+div,
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin: 0.5rem 0;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--secondary-text);
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--button-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--accent-color);
+}
+
+#result {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--primary-text);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-background);
+  color: var(--input-text);
+}
+
+img {
+  width: 300px;
+  height: auto;
+}
+
+form {
+  width: 90%;
+  max-width: 600px;
+}
+
+.result-line {
+  display: inline-block;
+  margin: 4px;
+  padding: 2px 4px;
+  background: var(--button-background);
+  color: var(--primary-text);
+  border-color: var(--line-border);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: 16px;
+}

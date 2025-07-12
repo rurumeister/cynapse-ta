@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CNY Angpao Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" defer src="dist/app.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <img src="/src/assets/rabbit.png" alt="rabbit" />
+      <h1>Chinese New Year Angpao Calculator</h1>
+      <form action="/calculate" method="POST">
+        <div>
+          <label for="amount">Amount to be distributed</label>
+          <input id="amount" name="amount" type="number" />
+        </div>
+        <div>
+          <label for="recipients">Number of recipients</label>
+          <input id="recipients" name="recipients" type="number" />
+        </div>
+        <button>Calculate</button>
+        <div id="result"></div>
+      </form>
+    </div>
+
+    <footer>
+      <p>
+        Made for Cynapse.ai,->
+        <a href="https://elroyportfolio.vercel.app/" target="_blank"
+          >my portfolio website</a
+        >
+        .
+      </p>
+    </footer>
+  </body>
+</html>
