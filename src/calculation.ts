@@ -19,7 +19,6 @@ export function distributeAmount(numbers: number[]): number[] {
 
   const amtInCents = Math.round(amount * 100);
 
-  // Validate inputs against 0 recipients / money
   if (recipients < 1) {
     throw new Error("Invalid number of recipients. Must be at least 1.");
   }
@@ -27,20 +26,18 @@ export function distributeAmount(numbers: number[]): number[] {
     throw new Error("Invalid amount. Must be at least 1.");
   }
 
-  // Array to hold distributed amounts
   const distribution = [];
 
-  // Edge case: if only one recipient, they will get the full amount
   if (recipients === 1) {
     distribution.push(convertToDollars(amtInCents));
     return distribution;
   }
 
   const avgAmtInCents = Math.floor(amtInCents / recipients);
-  console.log("avgAmtInCents: ", convertToDollars(avgAmtInCents));
+  // console.log("avgAmtInCents: ", convertToDollars(avgAmtInCents));
 
-  const minAmtInCents = Math.max(1, Math.floor(avgAmtInCents * 0.5)); // Ensures people don't get near 0
-  console.log("minAmount: ", convertToDollars(minAmtInCents));
+  const minAmtInCents = Math.max(1, Math.floor(avgAmtInCents * 0.5));
+  // console.log("minAmount: ", convertToDollars(minAmtInCents));
 
   if (minAmtInCents * recipients > amtInCents) {
     throw new Error(
@@ -48,41 +45,36 @@ export function distributeAmount(numbers: number[]): number[] {
     );
   }
 
-  let remainingAmount = amtInCents; // Initial variable to track
+  let remainingAmount = amtInCents;
 
-  // Distribute to all recipients except the last one
   for (let i = 0; i < recipients - 1; i++) {
     const remainingRecipients = recipients - i;
     const avgRemaining = remainingAmount / remainingRecipients;
 
-    // Set bounds: minimum is our floor, maximum is 150% of average remaining
-    // This prevents anyone from getting too much while ensuring decent amounts
     const maxAmount = Math.min(
-      remainingAmount - minAmtInCents * (remainingRecipients - 1), // Leave enough for others
-      Math.floor(avgRemaining * 1.5) // Don't exceed 150% of average
+      remainingAmount - minAmtInCents * (remainingRecipients - 1),
+      Math.floor(avgRemaining * 1.5)
     );
 
-    // Generate random amount between minAmount and maxAmount
     const randomAmount =
       minAmtInCents +
       Math.floor(Math.random() * (maxAmount - minAmtInCents + 1));
 
-    console.log(
-      `Recipient ${i + 1}: min=${convertToDollars(
-        minAmtInCents
-      )}, max=${convertToDollars(maxAmount)}, chosen=${convertToDollars(
-        randomAmount
-      )}, remaining=${convertToDollars(remainingAmount)}`
-    );
+    // console.log(
+    //   `Recipient ${i + 1}: min=${convertToDollars(
+    //     minAmtInCents
+    //   )}, max=${convertToDollars(maxAmount)}, chosen=${convertToDollars(
+    //     randomAmount
+    //   )}, remaining=${convertToDollars(remainingAmount)}`
+    // );
 
     distribution.push(convertToDollars(randomAmount));
     remainingAmount -= randomAmount;
   }
 
-  // Last recipient gets whatever is left
   distribution.push(convertToDollars(remainingAmount));
 
-  console.log("Final distribution: ", distribution);
+  // console.log("Final distribution: ", distribution);
   return distribution;
 }
 
@@ -96,10 +88,10 @@ export function calculateResult(numberValues: string[]): string {
   try {
     const numbers = cleanNumbers(numberValues);
 
-    console.log("cleanedNumbers: ", numbers);
+    // console.log("cleanedNumbers: ", numbers);
     result = distributeAmount(numbers).toString();
 
-    console.log("Distribution result: ", result);
+    // console.log("Distribution result: ", result);
   } catch (error) {
     result = error instanceof Error ? error.message : "An error occurred";
   }

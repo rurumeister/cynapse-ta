@@ -6,7 +6,7 @@
 export function extractNumbers(formData: any): string[] {
   const amountInput = formData.get("amount");
   const recipientsInput = formData.get("recipients");
-  console.log(amountInput, recipientsInput);
+  // console.log(amountInput, recipientsInput);
 
   return [amountInput, recipientsInput];
 }
