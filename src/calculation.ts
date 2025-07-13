@@ -1,4 +1,14 @@
 import { cleanNumbers } from "./util/numbers.js";
+
+/**
+ * Rounds an amount in cents to the nearest 0.5 dollar step (50 cents).
+ * @param amountInCents the amount in cents to round.
+ * @returns the rounded amount in cents.
+ */
+function roundToHalfDollarStep(amountInCents: number): number {
+  return Math.round(amountInCents / 50) * 50;
+}
+
 /**
  * Converts a number to a dollar amount with two decimal places.
  * @param amount the amount to convert.
@@ -22,22 +32,25 @@ export function distributeAmount(numbers: number[]): number[] {
   if (recipients < 1) {
     throw new Error("Invalid number of recipients. Must be at least 1.");
   }
-  if (amtInCents < 1) {
-    throw new Error("Invalid amount. Must be at least 1.");
+  if (amtInCents < 50) {
+    throw new Error("Invalid amount. Must be at least $0.50.");
   }
 
   const distribution = [];
 
   if (recipients === 1) {
-    distribution.push(convertToDollars(amtInCents));
+    distribution.push(convertToDollars(roundToHalfDollarStep(amtInCents)));
     return distribution;
   }
 
   const avgAmtInCents = Math.floor(amtInCents / recipients);
   // console.log("avgAmtInCents: ", convertToDollars(avgAmtInCents));
 
-  const minAmtInCents = Math.max(1, Math.floor(avgAmtInCents * 0.5));
-  // console.log("minAmount: ", convertToDollars(minAmtInCents));
+  const minAmtInCents = Math.max(
+    50,
+    roundToHalfDollarStep(Math.floor(avgAmtInCents * 0.5))
+  );
+  // console.log("minAmountInCents: ", convertToDollars(minAmtInCents));
 
   if (minAmtInCents * recipients > amtInCents) {
     throw new Error(
@@ -51,14 +64,16 @@ export function distributeAmount(numbers: number[]): number[] {
     const remainingRecipients = recipients - i;
     const avgRemaining = remainingAmount / remainingRecipients;
 
-    const maxAmount = Math.min(
-      remainingAmount - minAmtInCents * (remainingRecipients - 1),
-      Math.floor(avgRemaining * 1.5)
+    const maxAmount = roundToHalfDollarStep(
+      Math.min(
+        remainingAmount - minAmtInCents * (remainingRecipients - 1),
+        Math.floor(avgRemaining * 1.5)
+      )
     );
 
-    const randomAmount =
-      minAmtInCents +
-      Math.floor(Math.random() * (maxAmount - minAmtInCents + 1));
+    const numOfSteps = Math.floor((maxAmount - minAmtInCents) / 50) + 1;
+    const randomStepIndex = Math.floor(Math.random() * numOfSteps);
+    const randomAmount = minAmtInCents + randomStepIndex * 50;
 
     // console.log(
     //   `Recipient ${i + 1}: min=${convertToDollars(
@@ -72,16 +87,17 @@ export function distributeAmount(numbers: number[]): number[] {
     remainingAmount -= randomAmount;
   }
 
-  distribution.push(convertToDollars(remainingAmount));
+  const finalAmount = roundToHalfDollarStep(remainingAmount);
+  distribution.push(convertToDollars(finalAmount));
 
   // console.log("Final distribution: ", distribution);
   return distribution;
 }
 
 /**
- * Calculates result of distributing amounts bbased on array of string values.
+ * Calculates result of distributing amounts based on array of string values.
  * @param numberValues an array of string number values.
- * @returns
+ * @returns result of distribution in a string
  */
 export function calculateResult(numberValues: string[]): string {
   let result = "";
