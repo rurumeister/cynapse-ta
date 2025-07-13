@@ -6,6 +6,7 @@
   "scripts": {
     "test": "vitest --run --reporter verbose",
     "test:watch": "vitest",
+    "build": "tsc",
     "start": "npm run build && http-server -c-1"
   },
   "repository": {

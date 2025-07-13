@@ -11,12 +11,12 @@
       <h1>Chinese New Year Angpao Calculator</h1>
       <form action="/calculate" method="POST">
         <div>
-          <label for="amount">Amount to be distributed</label>
-          <input id="amount" name="amount" type="number" />
+          <label for="amount">Amount to be distributed (min. $0.5)</label>
+          <input id="amount" name="amount" type="numeric" steps="0.5" min="1" />
         </div>
         <div>
           <label for="recipients">Number of recipients</label>
-          <input id="recipients" name="recipients" type="number" />
+          <input id="recipients" name="recipients" type="number" min="1" />
         </div>
         <button>Calculate</button>
         <div id="result"></div>
@@ -25,7 +25,7 @@
 
     <footer>
       <p>
-        Made for Cynapse.ai,->
+        Made for Cynapse.ai |
         <a href="https://elroyportfolio.vercel.app/" target="_blank"
           >my portfolio website</a
         >
