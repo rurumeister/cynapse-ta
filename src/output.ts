@@ -5,8 +5,11 @@
  */
 export function generateResultText(calculationResult: string): string {
   let resultText = "";
-  console.log("calculationResult: ", calculationResult);
-  if (calculationResult.startsWith("Invalid")) {
+  // console.log("calculationResult: ", calculationResult);
+  if (
+    calculationResult.startsWith("Invalid") ||
+    calculationResult.startsWith("Amount")
+  ) {
     resultText = `ERROR: ${calculationResult}`;
   } else {
     resultText = `${calculationResult}`;
