@@ -30,7 +30,8 @@ Write a program that:
 ## Application Demo
 
 ![Application](src/assets/angpao-app-ss.png)
-Watch the demo video here! **[Link to demo video](src/assets/angpao-app-running.mp4)**
+
+Watch the demo here! **[Link to demo video](https://vimeo.com/1100967952?share=copy)**
 
 ## Screenshot of Test cases
 
