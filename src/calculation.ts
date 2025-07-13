@@ -5,7 +5,7 @@ import { cleanNumbers } from "./util/numbers.js";
  * @param amountInCents the amount in cents to round.
  * @returns the rounded amount in cents.
  */
-function roundToHalfDollarStep(amountInCents: number): number {
+export function roundToHalfDollarStep(amountInCents: number): number {
   return Math.round(amountInCents / 50) * 50;
 }
 
